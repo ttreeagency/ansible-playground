@@ -1,0 +1,41 @@
+# Default base playbooks
+---
+- hosts: all
+  sudo: yes
+  tasks:
+    - name: update apt cache
+      apt: update_cache=yes cache_valid_time=7200
+
+    - name: remove base package
+      apt: name={{ item }} state=absent
+      with_items:
+       - chef
+       - zerofree
+
+    - name: Install base package with latest version
+      apt: name={{ item }} state=latest update_cache=yes
+      with_items:
+       - git
+       - zsh
+       - git-core
+       - htop
+       - multitail
+       - curl
+       - wget
+       - rsync
+       - locales-all
+       - vim
+
+    - name: ensure dotdeb repository is present
+      apt_repository: repo='deb http://packages.dotdeb.org wheezy-php55 all' state=present
+
+    - name: ensure openntpd use the latest version
+      apt: name=openntpd state=latest update_cache=true
+      notify:
+        - start openntpd
+
+    - name: ensure logrotate use the latest version
+      apt: name=logrotate state=latest update_cache=true
+  handlers:
+    - name: start openntpd
+      service: name=openntpd state=started

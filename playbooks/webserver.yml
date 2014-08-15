@@ -1,0 +1,46 @@
+# Base webserver playbook
+---
+- hosts: webserver
+  remote_user: "{{ remote_user }}"
+  tasks:
+      # Create install path
+      - name: "ensure {{ install_path }} is present"
+        file: "path={{ install_path }} state=directory"
+      - name: "update owner of {{ install_path }}"
+        file: "path={{ install_path }} owner={{ app_user }} group={{ app_group }} state=directory"
+
+      - name: install PHP5 packages
+        apt: pkg={{ item }} state=present
+        with_items:
+          - php5-mysql
+          - php5-xcache
+          - php5-curl
+          - php5-cli
+          - php5-intl
+          - php5-gd
+          - php5-memcache
+          - memcached
+
+      # Configurations
+      - name: copy the php config file
+        template: src=config/php.j2 dest=/etc/php5/conf.d/99-ttree.ini
+
+      # Install composer
+      - command: test -f /usr/local/bin/composer.phar
+        register: composer_installed
+        ignore_errors: yes
+
+      - name: ensure composer is installed
+        when: composer_installed|failed
+        shell: "cd /usr/local/bin && curl -sS https://getcomposer.org/installer | php"
+
+      - name: upgrade composer
+        when: composer_installed|success
+        shell: "/usr/local/bin/composer.phar self-update"
+
+      # download code
+      - name: Download code
+        git: repo={{ git_repo }} dest={{ install_path }} accept_hostkey=yes
+
+      - name: install dependencies
+        shell: "cd {{ install_path }} && /usr/local/bin/composer.phar install"

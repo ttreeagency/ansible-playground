@@ -1,0 +1,8 @@
+---
+- include: playbooks/base.yml
+- include: playbooks/webserver.yml
+- include: playbooks/webserver-nginx.yml
+- include: playbooks/dbserver.yml
+
+
+
