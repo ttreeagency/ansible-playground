@@ -1,0 +1,4 @@
+---
+dotdeb_repository_base: deb http://packages.dotdeb.org wheezy all
+dotdeb_repository_php55: deb http://packages.dotdeb.org wheezy-php55 all
+dotdeb_key: http://www.dotdeb.org/dotdeb.gpg

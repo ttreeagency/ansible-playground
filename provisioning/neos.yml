@@ -1,0 +1,27 @@
+---
+- hosts: all
+  roles:
+     - common
+
+- hosts: dbserver
+  vars:
+    mysql_dbs:
+    - name: playground
+
+    mysql_users:
+    - name: playground
+      pass: playground
+      priv: "playground.*:ALL"
+
+  roles:
+     - mysql-client
+     - role: mysql-server
+       mysql_pkgs:
+         - python-selinux
+         - mysql-server-5.6
+         - python-mysqldb
+       mysql_root_db_pass: root
+       mysql_db: "{{ mysql_dbs }}"
+       mysql_users: "{{ mysql_users }}"
+
+

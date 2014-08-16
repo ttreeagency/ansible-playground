@@ -1,0 +1,4 @@
+---
+- name: Install mysql client package
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items: mysql_pkgs

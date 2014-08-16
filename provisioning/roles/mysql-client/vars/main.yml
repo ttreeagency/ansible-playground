@@ -1,0 +1,4 @@
+---
+
+mysql_pkgs:
+  - mysql-client-5.6

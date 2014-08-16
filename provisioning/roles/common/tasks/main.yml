@@ -1,0 +1,38 @@
+---
+- name: update apt cache
+  apt: update_cache=yes cache_valid_time=7200
+
+- name: remove package
+  apt: name={{ item }} state=absent
+  with_items:
+   - chef
+   - zerofree
+
+- name: install base package
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+   - git
+   - zsh
+   - git-core
+   - htop
+   - iotop
+   - multitail
+   - curl
+   - rsync
+   - locales-all
+   - vim
+   - unzip
+
+- name: add dotdeb repository
+  apt_repository: repo='{{ dotdeb_repository_base }}' state=present
+
+- name: add dotdeb repository key
+  apt_key: url={{ dotdeb_key }} state=present
+
+- name: install openntpd
+  apt: name=openntpd state=latest update_cache=true
+  notify:
+    - start openntpd
+
+- name: install logrotate
+  apt: name=logrotate state=latest update_cache=true
