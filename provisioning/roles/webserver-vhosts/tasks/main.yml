@@ -60,3 +60,13 @@
   shell: cd {{ vhost_base_directory }}{{ item.name }} && composer install -o -q -n --prefer-source
   with_items: vhosts
   when: item.deploy and item.deploy.composer is defined
+
+- name: "update owner of {{ vhost_base_directory }}{{ item.name }}/flow"
+  file: "path={{ vhost_base_directory }}{{ item.name }}/flow owner={{ item.app_user | default('www-data') }} mode=0755 state=file"
+  with_items: vhosts
+  when: item.type == 'typo3-neos' or item.type == 'typo3-flow'
+- name: set default permissions for flow application
+  shell: cd {{ vhost_base_directory }}{{ item.name }} && php flow core:setfilepermissions {{ item.app_user }} {{ item.app_group }} www-data
+  with_items: vhosts
+  when: item.type == 'typo3-neos' or item.type == 'typo3-flow'
+
