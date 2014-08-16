@@ -1,0 +1,9 @@
+---
+vhost_base_directory: /var/www/vhosts/
+log_base_directory: /var/log/nginx/
+php_fpm:
+  max_children: 12
+  start_servers: 6
+  min_spare_servers: 2
+  max_spare_servers: 8
+  max_requests: 2000

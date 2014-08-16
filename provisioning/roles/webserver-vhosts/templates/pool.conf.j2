@@ -1,0 +1,22 @@
+[{{ item.name }}]
+
+user                    = {{ item.app_user }}
+group                   = {{ item.app_group }}
+
+listen                  = /var/run/php5-fpm-{{ item.name }}.sock
+listen.owner            = www-data
+listen.group            = {{ item.app_group }}
+listen.mode             = 0660
+
+pm                      = dynamic
+pm.max_children         = {{ php_fpm.max_children }}
+pm.start_servers        = {{ php_fpm.start_servers }}
+pm.min_spare_servers    = {{ php_fpm.min_spare_servers }}
+pm.max_spare_servers    = {{ php_fpm.max_spare_servers }}
+pm.max_requests         = {{ php_fpm.max_requests }}
+
+chdir                   = /
+
+catch_workers_output    = yes
+
+php_admin_value[display_errors] = 'stderr'

@@ -1,0 +1,99 @@
+server {
+  listen 80;
+
+  access_log /var/log/nginx/{{ item.name }}/nginx_access.log combined;
+  error_log /var/log/nginx/{{ item.name }}/nginx_error.log;
+
+  server_name {{ item.server_name }};
+
+  root /var/www/vhosts/{{ item.name }}/Web;
+
+  client_max_body_size 100M;
+
+  index index.php index.html;
+
+  location = /favicon.ico {
+    log_not_found off;
+    access_log off;
+    expires max;
+  }
+
+  location = /robots.txt {
+    allow all;
+    log_not_found off;
+    access_log off;
+  }
+
+  # Deny all attempts to access hidden files such as .htaccess, .htpasswd, .DS_Store (Mac).
+  location ~ /\. {
+    deny all;
+    access_log off;
+    log_not_found off;
+  }
+
+  location ~* \.(js\.gzip|gz\.js)((\?\d\d\d\d\d\d\d\d\d\d)|(\?s=\d\d\d\d\d\d\d\d\d\d))$ {
+    expires max;
+    add_header Content-Encoding gzip;
+    gzip off;
+    default_type application/javascript;
+  }
+
+  location ~* \.(css\.gzip|gz\.css)((\?\d\d\d\d\d\d\d\d\d\d)|(\?s=\d\d\d\d\d\d\d\d\d\d))$ {
+    expires max;
+    add_header Content-Encoding gzip;
+    gzip off;
+    types {
+      text/css gzip;
+    }
+  }
+
+  location ~*  \.(jpg|jpeg|png|gif|css|js|ico)$ {
+    expires max;
+    log_not_found off;
+  }
+
+  location ~* \.(cur|ico|gif|png|jpe?g|css|js|swf|woff)((\?\d\d\d\d\d\d\d\d\d\d)|(\?s=\d\d\d\d\d\d\d\d\d\d))$ {
+    expires max;
+    log_not_found off;
+  }
+
+  location ~* \.(cur|ico|gif|png|jpe?g|css|js|swf|woff)(\?v\d\d?\.\d\d?\.\d\d?)$ {
+    expires max;
+    log_not_found off;
+  }
+
+  location ~* ^(/typo3/sysext|/typo3conf/ext).*\.(cur|ico|gif|png|jpe?g|css|js|swf|woff) {
+    expires max;
+    log_not_found off;
+  }
+
+  location = /clear.gif {
+    empty_gif;
+    expires max;
+  }
+
+  location ^~ /typo3/gfx {
+    expires max;
+  }
+
+  location ^~ /typo3temp/compressor {
+    expires max;
+  }
+
+  location ~* \.(sql|htaccess|htpasswd|tpl|html5|xhtml) {
+    deny all;
+  }
+
+  try_files $uri $uri/ /index.php?$args;
+
+  location ~ \.php$ {
+    try_files $uri =404;
+
+    fastcgi_index index.php;
+    fastcgi_pass unix:/var/run/php5-fpm-{{ item.name }}.sock;
+
+    include fastcgi_params;
+
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+  }
+}
