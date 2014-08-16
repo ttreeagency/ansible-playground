@@ -23,7 +23,6 @@
     - php5-memcache
     - php5-redis
     - php5-mcrypt
-    - memcached
   tags: [php]
 
 - name: disable nginx vhost

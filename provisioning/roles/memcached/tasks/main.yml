@@ -1,0 +1,8 @@
+---
+- name: install memcached packages
+  apt: pkg=memcached state=latest
+
+- name: memcached global configuration
+  template: src=memcached.conf.j2 dest=/etc/memcached.conf
+  notify:
+    - restart memcached

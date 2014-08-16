@@ -51,6 +51,8 @@
         app_group: vagrant
 
   roles:
+    - role: memcached
+
     - role: webserver-nginx
       user: vagrant
 
