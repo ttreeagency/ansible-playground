@@ -4,7 +4,7 @@
   with_items: vhosts
 
 - name: "update owner of /var/www/vhosts/{{ item.name }}"
-  file: "path={{ vhost_base_directory }}{{ item.name }} owner={{ item.app_user }} group=www-data mode=0750 state=directory"
+  file: "path={{ vhost_base_directory }}{{ item.name }} owner={{ item.app_user | default('www-data') }} group=www-data mode=0750 state=directory"
   with_items: vhosts
 
 - name: "ensure {{ vhost_base_directory }}{{ item.name }} sub directory are present"

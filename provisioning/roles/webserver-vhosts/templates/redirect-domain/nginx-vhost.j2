@@ -1,0 +1,5 @@
+server {
+    listen 80;
+    server_name {{ item.server_name }};
+    rewrite ^(.*) http://{{ item.destination_domain }}$1 permanent;
+}

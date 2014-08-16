@@ -30,6 +30,13 @@
 - hosts: webserver
   vars:
     vhosts:
+      - name: neos-workshop.box
+        enabled: Yes
+        php: No
+        server_name: neos-workshop.box
+        type: redirect-domain
+        destination_domain: www.neos-workshop.box
+
       - name: www.neos-workshop.box
         enabled: Yes
         php: Yes
