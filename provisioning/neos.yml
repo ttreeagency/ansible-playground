@@ -65,6 +65,10 @@
 
     - role: webserver-php
 
+    - role: php-pecl
+      php_pecl_extensions:
+       - yaml
+
     - role: webserver-vhosts
       vhosts: "{{ vhosts }}"
 

@@ -24,6 +24,7 @@
     - php5-memcache
     - php5-redis
     - php5-mcrypt
+    - libyaml-dev
   tags: [php]
 
 - name: disable nginx vhost
