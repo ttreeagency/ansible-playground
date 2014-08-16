@@ -59,7 +59,7 @@
         enabled: Yes
         php: Yes
         server_name: www.dummy.box
-        type: typo3-neos
+        type: typo3-cms
         app_user: vagrant
         app_group: vagrant
 
