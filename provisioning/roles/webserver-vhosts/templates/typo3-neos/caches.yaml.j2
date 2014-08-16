@@ -1,0 +1,94 @@
+Flow_Core:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+Flow_I18n_AvailableLocalesCache:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+Flow_I18n_XmlModelCache:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+Flow_I18n_Cldr_CldrModelCache:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+Flow_I18n_Cldr_Reader_DatesReaderCache:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+Flow_I18n_Cldr_Reader_NumbersReaderCache:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+Flow_I18n_Cldr_Reader_PluralsReaderCache:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+Flow_Monitor:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+Flow_Mvc_Routing_FindMatchResults:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+Flow_Mvc_Routing_Resolve:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+Flow_Mvc_ViewConfigurations:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+Flow_Persistence_Doctrine:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+Flow_Persistence_Doctrine_Results:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+Flow_Resource_Status:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+Flow_Security_Cryptography_RSAWallet:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+TYPO3_Media_ImageSize:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+TYPO3_TypoScript_Content:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+TYPO3_Neos_TypoScript:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]
+
+TYPO3_Neos_Configuration_Version:
+  backend: TYPO3\Flow\Cache\Backend\MemcachedBackend
+  backendOptions:
+    servers: [ '{{ memcache_server }}' ]

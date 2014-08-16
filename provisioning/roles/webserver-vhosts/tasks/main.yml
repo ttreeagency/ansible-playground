@@ -65,6 +65,12 @@
   file: "path={{ vhost_base_directory }}{{ item.name }}/flow owner={{ item.app_user | default('www-data') }} mode=0755 state=file"
   with_items: vhosts
   when: item.type == 'typo3-neos' or item.type == 'typo3-flow'
+
+- name: deploy typo3 neos cache configuration
+  template: src=typo3-neos/caches.yaml.j2 dest={{ vhost_base_directory }}{{ item.name }}/Configuration/Caches.yaml
+  with_items: vhosts
+  when: item.type == 'typo3-neos'
+
 - name: set default permissions for flow application
   shell: cd {{ vhost_base_directory }}{{ item.name }} && php flow core:setfilepermissions {{ item.app_user }} {{ item.app_group }} www-data
   with_items: vhosts

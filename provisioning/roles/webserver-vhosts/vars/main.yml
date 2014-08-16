@@ -1,6 +1,7 @@
 ---
 vhost_base_directory: /var/www/vhosts/
 log_base_directory: /var/log/nginx/
+memcache_server: 127.0.0.1
 php_fpm:
   max_children: 12
   start_servers: 6
