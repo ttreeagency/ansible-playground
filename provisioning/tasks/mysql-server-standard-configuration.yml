@@ -1,0 +1,5 @@
+---
+- name: ttree mysql general configuration
+  template: src=mysql-standard-configuration-ttree.cnf.j2 dest=/etc/mysql/conf.d/99-ttree.cnf
+  notify:
+    - restart mysql

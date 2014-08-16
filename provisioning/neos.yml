@@ -13,6 +13,12 @@
       pass: playground
       priv: "playground.*:ALL"
 
+  tasks:
+    - include: tasks/mysql-server-standard-configuration.yml
+
+  handlers:
+    - include: roles/mysql-server/handlers/main.yml
+
   roles:
      - role: mysql-client
        mysql_pkgs:
