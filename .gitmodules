@@ -1,3 +1,6 @@
 [submodule "provisioning/roles/mysql-server"]
 	path = provisioning/roles/mysql-server
 	url = git@github.com:bennojoy/mysql.git
+[submodule "provisioning/roles/php-pecl"]
+	path = provisioning/roles/php-pecl
+	url = git@github.com:Pheromone/ansible-php-pecl.git
