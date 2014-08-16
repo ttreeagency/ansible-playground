@@ -2,12 +2,12 @@
 ---
 - name: add dotdeb key
   apt_key: url={{ dotdeb_key }} state=present
-  when: php_version == '5.5'
+  when: php_version == 5.5
   tags: [php]
 
 - name: add dotdeb repository
   apt_repository: repo='{{ dotdeb_repository_php55 }}' state=present update_cache=yes
-  when: php_version == '5.5'
+  when: php_version == 5.5
   tags: [php]
 
 - name: install PHP5 packages
@@ -40,10 +40,24 @@
   tags: [fpm, php]
 
 - name: php ttree configuration
-  template: src=99-ttree.conf.j2 dest=/etc/php5/conf.d/99-ttree.conf
+  template: src=99-ttree.ini.j2 dest=/etc/php5/fpm/conf.d/99-ttree.ini
   notify:
     - restart php-fpm
   tags: [fpm, php]
+
+- name: php ttree configuration
+  template: src=99-ttree.ini.j2 dest=/etc/php5/cli/conf.d/99-ttree.ini
+  tags: [php]
+
+- name: php opcache configuration
+  template: src=98-opcache.ini.j2 dest=/etc/php5/fpm/conf.d/98-opcache.ini
+  notify:
+    - restart php-fpm
+  tags: [fpm, php]
+
+- name: php opcache configuration
+  template: src=98-opcache.ini.j2 dest=/etc/php5/cli/conf.d/98-opcache.ini
+  tags: [php]
 
 - name: php fpm log permissions
   file: "path=/var/log/php5-fpm.log owner=root group=adm mode=0644 state=file"
@@ -51,7 +65,7 @@
 
 - name: install PHP 5.4 APC packages
   apt: pkg=php5-apc state=present
-  when: php_version != '5.5'
+  when: php_version != 5.5
   notify:
     - restart php-fpm
   tags: [php]
