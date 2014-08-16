@@ -14,6 +14,7 @@
   apt: pkg={{ item }} state=present
   with_items:
     - php5-cli
+    - php5-dev
     - php5-curl
     - php5-fpm
     - php5-gd
@@ -33,6 +34,12 @@
 
 - name: php fpm global configuration
   template: src=php-fpm.conf.j2 dest=/etc/php5/fpm/php-fpm.conf
+  notify:
+    - restart php-fpm
+  tags: [fpm, php]
+
+- name: php ttree configuration
+  template: src=99-ttree.conf.j2 dest=/etc/php5/conf.d/99-ttree.conf
   notify:
     - restart php-fpm
   tags: [fpm, php]
