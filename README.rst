@@ -18,6 +18,29 @@ box, with PHP 5.5, Nginx and MySQL. As we are active contributors to TYPO3
 Neos, this box will receive a lots of love to help us in testing Neos in
 different version, ...
 
+------------
+Installation
+------------
+
+.. code-block:: bash
+
+    $ pip install ansible
+    $ git clone git@github.com:ttreeagency/ansible-playground.git
+    $ cd ansible-playground
+    $ git submodule init
+    $ git submodule update
+    $ vagrant up
+
+Update your hosts file:
+
+.. code-block::
+
+    192.168.77.21 www.neos-workshop.box neos-workshop.box
+
+And open your browser to http://www.neos-workshop.box/setup
+
+Enjoy ...
+
 ================
 Availables Roles
 ================
