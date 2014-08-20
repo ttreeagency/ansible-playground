@@ -27,6 +27,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 	config.vbguest.auto_update = false
 
+	config.vm.synced_folder ".", "/vagrant", type: "nfs"
+
     machine.vm.provider "virtualbox" do |v|
       v.customize ["modifyvm", :id, "--memory", mem]
     end
